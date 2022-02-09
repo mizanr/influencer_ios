@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{'HIRED_SERVICES' | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="noDatadiv" *ngIf="noData">
+    <ion-icon name="ios-search-outline"></ion-icon>
+    <p>{{'NO_DATA_FOUND' | translate}}</p>
+  </div>
+  <div class="feed" *ngFor="let k of services">
+    <post [k]='k'>
+    </post>
+
+  </div>
+
+</ion-content>
