@@ -21,7 +21,7 @@ import { ImagePicker } from '@ionic-native/image-picker';
 import { normalizeURL } from 'ionic-angular';
 import { VideoEditor, CreateThumbnailOptions } from '@ionic-native/video-editor';
 
-const MAX_FILE_SIZE = 4 * 1024 * 1024;
+const MAX_FILE_SIZE = 20 * 1024 * 1024;
 const ALLOWED_MIME_TYPE = "video/mp4";
 @Injectable()
 export class MediaProvider {
@@ -456,7 +456,7 @@ export class MediaProvider {
            })
        .catch(e => {
          this.loading.hide();
-         alert("pick file error"+JSON.stringify(e));
+        //  alert("pick file error"+JSON.stringify(e));
          resolve(0)
        });
      });
@@ -598,6 +598,7 @@ export class MediaProvider {
         .catch(err => {
           // this.alert.presentToast('mizantest locl file system err -----','bottom');
           console.log("localfilesytem resolve.....", err);
+          alert('readAsBlob-----err'+JSON.stringify(err));
           resolve(0);
         });
     })
@@ -784,16 +785,16 @@ export class MediaProvider {
           if (data) {
             let path = data.includes("file://") ? data : "file://" + data;
             console.log('checking path ', path);
+            // alert('checking path----'+JSON.stringify(path));
             this.loading.show();
             var filename = data.substr(data.lastIndexOf('/') + 1);
             var dirpath = data.substr(0, data.lastIndexOf('/') + 1);
-
             dirpath = dirpath.includes("file://") ? dirpath : "file://" + dirpath;
-
             try {
               var dirUrl = await this.file.resolveDirectoryUrl(dirpath);
               var retrievedFile = await this.file.getFile(dirUrl, filename, {});
             } catch (err) {
+              alert('try error'+JSON.stringify(err));
               console.log('try error');
               console.error(err);
               this.loading.hide();
@@ -802,6 +803,8 @@ export class MediaProvider {
             }
 
             retrievedFile.file(f => {
+              // alert ('file------'+JSON.stringify(f)+'-------------max file size-----'+JSON.stringify(MAX_FILE_SIZE));
+              // alert ('max file size'):
               this.loading.hide();
               console.log('retrieved file size:', f.size);
               console.log('retrieved file mime:', f.type);
@@ -810,9 +813,10 @@ export class MediaProvider {
                 resolve(0);
                 return this.alert.show("Alert!", 'Incorrect file format!');
               }
+              // alert ('file size')
               if (f.size > MAX_FILE_SIZE) {
                 resolve(0);
-                return this.alert.show("Alert!", 'Please add video that have size less than 4 mb.');
+                return this.alert.show("Alert!", 'Please add video that have size less than 20 mb.');
               } else {
                 this.readAsBlob(dirpath + filename).then((res) => {
                   if (res == 0) {

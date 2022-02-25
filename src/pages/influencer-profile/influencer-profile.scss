@@ -3,7 +3,7 @@ page-influencer-profile {
     position: absolute;
     width: 100%;
     padding: 16px;
-    top: 50px;
+    top: 45px;
     color: #fff;
 
     .item {
@@ -29,14 +29,21 @@ page-influencer-profile {
       align-items: self-end;
       .img_profile {
         img {
-          width: 80px;
+          // width: 80px;
+          // border-radius: 50%;
+          // height: 80px;
+          // object-fit: cover;
+
+          // background-color: white;
           border-radius: 50%;
-          height: 80px;
+          width: 100px;
+          height: 75px;
           object-fit: cover;
         }
       }
       .proflie_info {
-        width: 70%;
+        width: 100%;
+        height: 75px;
         .btn_mess button {
           width: 160px;
           margin: 10px 10px;

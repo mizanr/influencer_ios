@@ -113,7 +113,7 @@ export class EditProfilePage {
       data['dob'] = { "value": this.formData.dob, "type": "DOB" };
       data['gender'] = { "value": this.formData.gender, "type": "GENDER" };
       data['category'] = { "value": this.cate, "type": "CATE" };
-      // data['facebook_channel'] = { "value": this.formData.facebook_channel, "type": "NO" };
+      data['facebook_channel'] = { "value": this.formData.facebook_channel, "type": "NO" };
       data['Instagram_channel'] = { "value": this.formData.Instagram_channel, "type": "NO" };
       data['youtube_channel'] = { "value": this.formData.youtube_channel, "type": "NO" };
       data['tiktok_channel'] = { "value": this.formData.tiktok_channel, "type": "NO" };

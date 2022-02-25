@@ -134,7 +134,7 @@ export class ImageProvider {
                 }).then((data) => {
                   resolve('data:image/jpeg;base64,' + data);
                 }, (err) => {
-                  alert('image error'+JSON.stringify(err));
+                  // alert('image error'+JSON.stringify(err));
                   reject('Unable to take photo: ' + err);
                 })
 
@@ -156,7 +156,7 @@ export class ImageProvider {
                 }).then((data) => {
                   resolve('data:image/jpeg;base64,' + data);
                 }, (err) => {
-                  alert('image----'+JSON.stringify(err));
+                  // alert('image----'+JSON.stringify(err));
                   reject('Unable to take photo: ' + err);
                 })
 

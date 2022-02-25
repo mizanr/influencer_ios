@@ -264,9 +264,9 @@ export class ConversationPage {
       file_type: { value: type, type: 'NO' },
     }
 
-    alert('send media passing data-----'+ JSON.stringify(data));
+    // alert('send media passing data-----'+ JSON.stringify(data));
     this.api.postData(data, 0, 'Send_media').then((res: any) => {
-      alert('send media called'+JSON.stringify(res))
+      // alert('send media called'+JSON.stringify(res))
       if (res.status == "1") {
         this.send(res.file_name, type);
 
@@ -348,7 +348,7 @@ export class ConversationPage {
           text: this.trans.instant('SEND_FILE'),
           handler: () => {
             this.media.getFile().then((res1: any) => {
-              alert('get file successfull-----'+JSON.stringify(res1));
+              // alert('get file successfull-----'+JSON.stringify(res1));
               console.log('res1------------', res1);
 
               if (res1 != 0) {

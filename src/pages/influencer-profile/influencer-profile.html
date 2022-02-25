@@ -8,7 +8,7 @@
 
   <div class="Image_create">
     <img *ngIf="profile.background_image" [src]="profile.background_image"
-      style="height: 200px;width: 100%;object-fit: cover;margin-bottom: 65px;">
+      style="height: 205px;width: 100%;object-fit: cover;margin-bottom: 65px;">
     <div class="topbar">
       <button class="backBtn" *ngIf="navParams.get('InfluId')" ion-button clear no-margin (click)="back()">
 
@@ -71,28 +71,28 @@
         </div>
         <div class="proflie_info">
           <ion-row>
-            <ion-col col-3 *ngIf="profile.Instagram_follower>0">
+            <ion-col col-4 *ngIf="profile.Instagram_follower>0">
               <div class="count">
                 <h3>{{profile.Instagram_follower}}</h3>
                 <p>{{'INSTAGRAM' | translate}}</p>
                 <p>{{'FOLLOWERS' | translate}}</p>
               </div>
             </ion-col>
-            <ion-col col-3 *ngIf="profile.facebook_follower>0">
+            <!-- <ion-col col-3 *ngIf="profile.facebook_follower>0">
               <div class="count">
                 <h3>{{profile.facebook_follower}}</h3>
                 <p>{{'FACEBOOK' | translate}}</p>
                 <p>{{'FOLLOWERS' | translate}}</p>
               </div>
-            </ion-col>
-            <ion-col col-3 *ngIf="profile.tiktok_follower>0">
+            </ion-col> -->
+            <ion-col col-4 *ngIf="profile.tiktok_follower>0">
               <div class="count">
                 <h3>{{profile.tiktok_follower}}</h3>
                 <p>{{'TIKTOK' | translate}}</p>
                 <p>{{'FOLLOWERS' | translate}}</p>
               </div>
             </ion-col>
-            <ion-col col-3 *ngIf="profile.youtube_follower>0">
+            <ion-col col-4 *ngIf="profile.youtube_follower>0">
               <div class="count">
                 <h3>{{profile.youtube_follower}}</h3>
                 <p>Youtube</p>
