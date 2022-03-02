@@ -1,4 +1,5 @@
-<ion-menu [side]="auth.getUserLanguage()=='en'?'left':'right'" [content]="nav" type="overlay" persistent="true" id="content">
+<ion-menu [side]="auth.getUserLanguage()=='en'?'left':'right'" [content]="nav" type="overlay" swipeEnabled="false"
+persistent="true" id="content">
 
   <ion-content>
     <div *ngIf="auth.isUserLoggedIn() && auth.getUserDetails().user_type==1">

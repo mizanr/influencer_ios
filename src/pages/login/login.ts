@@ -75,6 +75,7 @@ export class LoginPage {
         this.api.postData(data, 0, 'login').then((res: any) => {
           if (res.status == 1) {
             localStorage.removeItem('guest');
+            window.location.href='';
             // this.alert.show("Alert!", res.message);
             // this.navCtrl.pop();
             this.events.publish('LoggedIn');

@@ -237,8 +237,10 @@ export class LoginPopupPage {
 
       });
       if (result.status == 2) {
+        window.location.href='';
         this.navCtrl.push('SelectPage', { SignupData: SignUpDetail ,is_social:1});
       } else if (result.status == 1) {
+        window.location.href='';
         localStorage.removeItem('guest');
         this.auth.updateUserDetails(result.user);
         setTimeout(() => {
