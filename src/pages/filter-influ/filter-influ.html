@@ -33,10 +33,20 @@
           placeholder="{{'FILTER_BY_COUNTRY' | translate}}">
       </ion-item>
 
+      <div margin-bottom>
+        <div>
+          <button class="btn-theme"
+           ion-button icon-end small round padding-horizontal
+          *ngFor="let c of filter?.country_show; let i=index">
+            {{c}} 
+          </button>
+        </div>
+      </div>
+
 
       <ion-item *ngIf="auth?.getUserDetails()?.user_type==1" class="input_1" no-padding no-lines>
         <ion-label>{{'FILTER_BY_GENDER' | translate}}</ion-label>
-        <ion-select placeholder="{{'FILTER_BY_GENDER' | translate}}"
+        <ion-select placeholder="{{'FILTER_BY_GENDER' | translate}}"  
           style="width: 100%;max-width: 100%;padding-left: 0;" [(ngModel)]="filter.gender">
           <ion-option value="Male">{{'MALE' | translate}}</ion-option>
           <ion-option value="Female">{{'FEMALE' | translate}}</ion-option>
@@ -47,14 +57,24 @@
 
       <ion-item class="input_1" no-padding no-lines>
         <ion-label>{{'FILTER_BY_CATEGORY' | translate}}</ion-label>
-        <ion-select style="width: 100%;max-width: 100%;padding-left: 0;"
+        <ion-select style="width: 100%;max-width: 100%;padding-left: 0;" 
+        (ionChange)="cate_change()"
+        multiple="true"
           placeholder="{{'FILTER_BY_CATEGORY' | translate}}" [(ngModel)]="filter.category">
           <ion-option *ngFor="let item of categories" [value]="item.id">{{item.name}}</ion-option>
         </ion-select>
       </ion-item>
 
+
       <ion-item class="input_1" no-padding no-lines>
-        <ion-select style="width: 100%;max-width: 100%;padding-left: 0;" [(ngModel)]="filter.post_type"
+        <ion-select style="width: 100%;max-width: 100%;padding-left: 0;" [(ngModel)]="filter.post_type" multiple="true" (ionChange)="type_change()"
+          placeholder="{{'FILTER_BY_SERVICE_TYPE' | translate}}">
+          <ion-option *ngFor="let s of services" [value]="s.name">{{s.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <!-- <ion-item class="input_1" no-padding no-lines>
+        <ion-select style="width: 100%;max-width: 100%;padding-left: 0;" [(ngModel)]="filter.post_type" multiple="true" (ionChange)="type_change()"
           placeholder="{{'FILTER_BY_SERVICE_TYPE' | translate}}">
           <ion-option value="Facebook">{{'FACEBOOK' | translate}}</ion-option>
           <ion-option value="Image file">{{'IMAGE_FILE' | translate}}</ion-option>
@@ -63,7 +83,7 @@
           <ion-option value="Instagram Post">{{'INSTAGRAM_POST' | translate}}</ion-option>
           <ion-option value="Instagram Story">{{'INSTAGRAM_STORY' | translate}}</ion-option>
         </ion-select>
-      </ion-item>
+      </ion-item> -->
 
       <ion-item *ngIf="auth?.getUserDetails()?.user_type==1" class="input_1" no-padding no-lines>
         <ion-label>{{'SELECT_AGE' | translate}}</ion-label>
@@ -146,9 +166,18 @@
           <ion-option>75</ion-option>
         </ion-select>
       </ion-item>
+      <div *ngIf="auth?.getUserDetails()?.user_type==2">
+        <button 
+        class="btn-theme" [disabled]="filter?.name?.trim()?.length==0&&filter?.country?.length==0&&filter?.post_type?.length==0&&filter?.category.length==0"
+        (click)="apply()" ion-button round full>{{'APPLY' |
+          translate}}</button>
+      </div>
+     
 
-      <button class="btn-theme" (click)="viewCtrl.dismiss(this.filter)" ion-button round full>{{'APPLY' |
-        translate}}</button>
+        <button class="btn-theme" *ngIf="auth?.getUserDetails()?.user_type==1"
+        (click)="apply()" ion-button round full>{{'APPLY' |
+          translate}}</button>
+
     </ion-list>
   </div>
 </ion-content>

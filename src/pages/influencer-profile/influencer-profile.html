@@ -8,7 +8,7 @@
 
   <div class="Image_create">
     <img *ngIf="profile.background_image" [src]="profile.background_image"
-      style="height: 205px;width: 100%;object-fit: cover;margin-bottom: 65px;">
+      style="height: 210px;width: 100%;object-fit: cover;margin-bottom: 65px;">
     <div class="topbar">
       <button class="backBtn" *ngIf="navParams.get('InfluId')" ion-button clear no-margin (click)="back()">
 
@@ -196,7 +196,7 @@
         <ion-item
           class="detail_item detail_item2" no-lines no-padding>
           <ion-avatar item-start>
-            <img src="assets/imgs/tiktok.png">
+            <img src="assets/imgs/tik.png">
           </ion-avatar>
           <button  (click)="iab.create('https://www.tiktok.com/@'+profile.tiktok_channel)" ion-button small item-end>Open</button>
         </ion-item>

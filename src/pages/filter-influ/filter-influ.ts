@@ -10,9 +10,25 @@ import { NavController, NavParams, ViewController, IonicPage } from 'ionic-angul
   templateUrl: 'filter-influ.html',
 })
 export class FilterInfluPage {
-  filter: any;
+  // filter:any= {
+  //   country_show:[],
+  // };
+
+  filter:any = {
+    name: '',
+    country: [],
+    "country_show": [],
+    category: [],
+    reviews: '',
+    age: '',
+    gender: '',
+    post_type:[],
+    is_filter:false,
+  }
+
   countries: any;
   categories: any = [];
+  services: any = [];
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public viewCtrl: ViewController,
     public api: RestApiProvider,
@@ -21,13 +37,38 @@ export class FilterInfluPage {
     this.filter = this.navParams.get('Filter');
   }
 
+
+  ionViewWillEnter() {
+    this.get_service();
+  }
+
   openModal() {
     let modal = this.api.modalCtrl.create('SelectCountryPage', { countries: this.countries });
     modal.onDidDismiss((data: any) => {
       if (data) {
-        this.filter.country.id = data.id;
-        this.filter.country.nicename = data.nicename;
+        this.filter.country=[];
+        this.filter.country_show=[];
         console.log(data);
+        for(let i=0;i<data.length;i++){
+          if(this.filter.country_show){
+          this.filter.country_show.push(data[i].nicename);
+        }
+        else {
+          this.filter['country_show']=[data[i].nicename];
+        }
+          this.filter.country.push(data[i].id);
+        }
+        // if(this.filter.country_show){
+        //   this.filter.country_show.push(data.nicename);
+        // }
+        // else {
+        //   this.filter['country_show']=[data.nicename];
+        // }
+        //console.log('filter country array---',this.filter.country_show);
+
+        // this.filter.country.nicename = data.nicename;
+        
+        // this.filter.country.push(data.id);
       }
     });
     modal.present();
@@ -42,6 +83,16 @@ export class FilterInfluPage {
         this.getCodes();
       }
       else {
+      }
+    })
+  }
+
+
+  get_service() {
+    this.api.get({},0,'getService').then((res:any) => {
+      console.log(res);
+      if(res.status==1){
+        this.services=res.data;
       }
     })
   }
@@ -74,15 +125,33 @@ export class FilterInfluPage {
   reset() {
     this.filter = {
       name: '',
-      country: {
-        id: "",
-        nicename: ""
-      },
-      category: '',
+      country: [],
+      category: [],
       reviews: '',
       age: '',
       gender: '',
-      post_type:''
+      post_type:[],
+      is_filter:false,
     }
+    this.viewCtrl.dismiss(this.filter);
   }
+
+  type_change() {
+    console.log(this.filter.post_type);
+  }
+
+  cate_change() {
+    console.log(this.filter.category);
+  }
+
+  remove_country(c,inx) {
+    this.filter.country.splice(inx,1);
+    this.filter.country_show.splice(inx,1);
+  }
+
+  apply(){
+    this.filter['is_filter']=true;
+    this.viewCtrl.dismiss(this.filter);
+  }
+
 }

@@ -23,13 +23,11 @@ export class HomeInfluencerPage {
   observableVar: Subscription;
   filter = {
     name: '',
-    country: {
-      id: "",
-      nicename: ""
-    },
-    category: '',
+    country: [],
+    category: [],
     reviews: '',
-    post_type: ''
+    post_type: [],
+    is_filter:false,
   };
   previousPostCount: any;
   noMoreRecords = false;
@@ -92,12 +90,12 @@ export class HomeInfluencerPage {
     let data = {
       "user_id": this.auth.isUserLoggedIn()?this.auth.getCurrentUserId():this.auth.guest_id(),
       "type": 1,
-      "category": this.filter.category,
+      "category": this.filter.category.join(','),
       // "gender": this.filter.gender,
-      "country": this.filter.country.nicename,
+      "country": this.filter.country.join(','),
       // "age": this.filter.age,
       "name": this.filter.name,
-      "post_type": this.filter.post_type,
+      "post_type": this.filter.post_type.join(','),
       "start": this.start,
       "limit": 30,
     }

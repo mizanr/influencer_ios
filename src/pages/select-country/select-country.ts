@@ -11,6 +11,7 @@ export class SelectCountryPage {
   @ViewChild('searchinput') searchinput;
   countrylist = [];
   searchList = [];
+  selected_country=[];
   constructor(
     public navCtrl: NavController,
     public viewCtrl: ViewController,
@@ -40,11 +41,29 @@ export class SelectCountryPage {
         if (!a.name) return false;
         return a.name.toLowerCase().indexOf(val.toLowerCase()) > -1;
       });
+      // this.selected_country=this.searchList.filter((item) =>{return item.is_check;});
     }
     else {
       this.searchList = Object.assign([], this.countrylist);
+      // this.selected_country=this.searchList.filter((item) =>{return item.is_check;});
     }
   }
 
+  select(ev:any,c:any,inx:any) {
+    // for(let i=0;this.searchList.length;i++){
+      // if(i==inx&&ev.value){
+      //   // this.searchList[inx].is_check=true;
+      // } else {
+      //   //this.searchList[i].is_check=false;
+      // }
+    // }
+    this.selected_country=this.searchList.filter((item) =>{return item.is_check;});
+  }
+
+  done() {
+    // if(this.selected_country.length>0){
+      this.viewCtrl.dismiss(this.selected_country);
+    // }
+  }
 
 }
