@@ -15,6 +15,7 @@ import { TranslateService } from '@ngx-translate/core';
 import * as firebase from 'firebase';
 import { JobDetialPage } from '../pages/job-detial/job-detial';
 import { EncryptProvider } from '../providers/encrypt/encrypt';
+import { s } from '@angular/core/src/render3';
 const config = {
   apiKey: 'AIzaSyC0ALZAVZCK8bRgP2Rm1ihdjwT-tSLk3tE',
   authDomain: 'fir-85886.firebaseapp.com',
@@ -51,6 +52,7 @@ export class MyApp {
 
 
     platform.ready().then(() => {
+      this.paypal_setup();
       localStorage.removeItem('guest');
       if (platform.is('cordova')) {
         this.setBackButton();
@@ -131,6 +133,22 @@ export class MyApp {
     });
 
     firebase.initializeApp(config);
+  }
+
+
+  paypal_setup() {
+    this.api.get({},0,'Paypal_detail').then((res:any) => {
+      console.log('----------------',res);
+        if(res.status==1){
+          var script = document.createElement('script');
+          script.type='text/javascript';
+          script.src= `https://www.paypal.com/sdk/js?client-id=${res.data.PayPal_CLIENT_ID}&components=buttons`;
+          // script.src= `https://www.paypal.com/sdk/js?client-id='ATEngXosYa6HC-4WLP3E095suv9_yH6whYpCBMGCrwKf5V_Wd3GUDQW8NNQeyUXiPWZzYqOlmwzlw8mf'&components=buttons`;
+          document.head.appendChild(script);
+          // document.body.appendChild(script);
+          console.log('script-------',script);
+        }
+      });
   }
 
 

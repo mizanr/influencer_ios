@@ -10,7 +10,7 @@
 
     <ion-buttons end>
       <!-- <header-icon></header-icon> -->
-      <button (click)="openfilter()" class="filerIconBtn" ion-button clear icon-only color="light">
+      <button (click)="openfilter()" [ngClass]="filter.is_filter==false?'':'green-bg'" class="filerIconBtn" ion-button clear icon-only color="light">
         <!-- <img src="assets/imgs/filter.png" style="width: 25px;"> -->
         <ion-icon color="light" name="search"></ion-icon>
       </button>

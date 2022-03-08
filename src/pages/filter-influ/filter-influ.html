@@ -174,7 +174,9 @@
       </div>
      
 
-        <button class="btn-theme" *ngIf="auth?.getUserDetails()?.user_type==1"
+        <button class="btn-theme" *ngIf="auth?.getUserDetails()?.user_type==1" 
+        [disabled]="filter?.name?.trim()?.length==0&&filter?.country?.length==0&&
+        filter?.post_type?.length==0&&filter?.category.length==0&&filter.age.length==0&&filter.gender.length==0"
         (click)="apply()" ion-button round full>{{'APPLY' |
           translate}}</button>
 

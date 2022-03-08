@@ -21,15 +21,13 @@ export class HomePage {
   public buttonClicked: boolean = false;
   filter = {
     name: '',
-    country: {
-      id: "",
-      nicename: ""
-    },
-    category: '',
+    country: [],
+    category: [],
     reviews: '',
     age: '',
     gender: '',
-    post_type: ''
+    post_type: [],
+    is_filter:false,
   };
   start: any = 0;
   influStart = 0;
@@ -77,6 +75,7 @@ export class HomePage {
   }
 
   getService(inf, s, refresher) {
+
     let data = {
       // "user_id": { "value": this.auth.getCurrentUserId(), "type": "NO" },
       // "type": { "value": 2, "type": "NO" },
@@ -92,17 +91,17 @@ export class HomePage {
       "user_id": this.auth.isUserLoggedIn()?this.auth.getCurrentUserId():this.auth.guest_id(),
       "type": 2,
       // "keywords": { "value": this.filter.keywords, "type": "NO" },
-      "category": this.filter.category,
+      "category": this.filter.category.join(','),
       "gender": this.filter.gender,
-      "country": this.filter.country.nicename,
+      "country": this.filter.country.join(','),
       "age": this.filter.age,
       "name": this.filter.name,
-      "post_type": this.filter.post_type,
+      "post_type": this.filter.post_type.join(','),
       "start": this.start,
       "limit": 30,
     }
-    this.api.get(data, s, 'getPostList').then((res: any) => {
-    
+
+    this.api.get(data, s,'getPostList').then((res: any) => {    
       if (inf != '') {
         inf.complete();
       }
@@ -134,6 +133,7 @@ export class HomePage {
         this.noData = false
       }
     })
+    
   }
 
 

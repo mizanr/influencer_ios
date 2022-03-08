@@ -174,6 +174,7 @@ export class AppliedInfluencerPage {
       if(res){
         let Data = {
           // id:k.Id,
+          applied_id:k.applied_id,
           id:k.applied_id,
           user_id:this.auth.getCurrentUserId(),
           // company_id:this.auth.getCurrentUserId(),
